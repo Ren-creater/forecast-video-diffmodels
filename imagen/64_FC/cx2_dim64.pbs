@@ -1,0 +1,26 @@
+#!/bin/bash
+#PBS -l select=1:ncpus=4:mem=48gb:ngpus=1:gpu_type=L40S
+#PBS -l walltime=72:00:00
+
+eval "$(~/anaconda3/bin/conda shell.bash hook)"
+
+source activate research_env
+
+#conda install python=3.10.12
+#python3 -m pip install -r /rds/general/user/zr523/home/researchProject/forecast-diffmodels/imagen/requirements.txt
+
+cd /rds/general/user/zr523/home/researchProject/
+
+cd imagen-pytorch
+python setup.py develop
+cd ..
+
+cd forecast-diffmodels/imagen/64_FC
+
+python train64.py -mode execute -run_name v_FC_dim64 -epochs 400
+
+# python test64.py -run_name v_FC_dim64 -best_epoch 395
+
+python v_t02-sampling-and-evaluation.py -run_name v_FC_dim64
+
+RUN_NAME="v_FC_dim64" jupyter nbconvert --execute --to notebook 'v_T03 - Visualizing Metrics.ipynb' --output "v_FC_dim64"
