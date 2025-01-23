@@ -20,22 +20,18 @@ To set up the project environment, follow these steps:
      ```bash
      conda env create research_env python=3.10
      conda activate research_env
+     cd ./imagen && pip install -r requirements.txt
      ```
 
-3. Install the climate RL environments:
-    ```
-    cd ./imagen && pip install -r requirements.txt
-    ```
-
-4. Evaluation Metrics:
-   clone the repository https://github.com/JunyaoHu/common_metrics_on_video_quality
+3. Evaluation Metrics:
+   clone the repository https://github.com/JunyaoHu/common_metrics_on_video_quality,
    place its files and folders in the directory ./imagen/64_FC
 
 
 ## Data Preparation
 
 ### 1. Download ERA5 and IR Data
-- Download data using the notebooks and python files in ./dataproc
+- Download data using the notebooks and python scripts in ./dataproc
 
 ### 2. Data Processing
 - Run python files of the form *create-dataloaders.py in ./dataproc
@@ -57,7 +53,8 @@ Please see ./imagen/64_FC/cx2_gen.sh for details.
 
 ## Acknowledgments
 
-- The **VDM model** implementation is adapted from the repository [lucidrains/denoising-diffusion-pytorch](https://github.com/lucidrains/denoising-diffusion-pytorch).
+- The project is based on https://github.com/p3jitnath/forecast-diffmodels.
+- The **VDM model** implementation is adapted from the repository https://github.com/lucidrains/imagen-pytorch.
 - Thanks to https://github.com/JunyaoHu/common_metrics_on_video_quality for their implementation of FVD.
 
 ## License
